@@ -31,7 +31,7 @@ FROM symbiyosys-ghdl AS symbiyosys-ghdlsynth
 RUN cd /root && \
     mkdir ghdlsynth-beta && \
     cd ghdlsynth-beta && \
-    curl https://codeload.github.com/tmeissner/ghdlsynth-beta/tar.gz/tests | tar xzf - --strip-components=1 && \
+    curl https://codeload.github.com/tgingold/ghdlsynth-beta/tar.gz/master | tar xzf - --strip-components=1 && \
     make GHDL=/opt/ghdl/bin/ghdl YOSYS_CONFIG=/opt/yosys/bin/yosys-config && \
     make install GHDL=/opt/ghdl/bin/ghdl YOSYS_CONFIG=/opt/yosys/bin/yosys-config
 
@@ -47,6 +47,8 @@ RUN apt-get update -qq && \
     libreadline7 \
     libtcl8.6 \
     libgnat-8 \
+    libllvm7 \
+    gcc \
     make \
     python3 && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
@@ -54,13 +56,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # copy build artifacts
-COPY --from=symbiyosys-ghdlsynth /opt/ghdl /opt/ghdl
-COPY --from=symbiyosys-ghdlsynth /opt/symbiyosys /opt/symbiyosys
-COPY --from=symbiyosys-ghdlsynth /opt/yosys /opt/yosys
-COPY --from=symbiyosys-ghdlsynth /opt/z3 /opt/z3
-COPY --from=symbiyosys-ghdlsynth /opt/yices2 /opt/yices2
-COPY --from=symbiyosys-ghdlsynth /opt/cvc4 /opt/cvc4
-COPY --from=symbiyosys-ghdlsynth /opt/boolector /opt/boolector
+COPY --from=symbiyosys-ghdlsynth /opt /opt
 
 # Enhance path variable
 ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/cvc4/bin:/opt/boolector/bin:$PATH"
