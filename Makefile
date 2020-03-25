@@ -1,4 +1,4 @@
-.PHONY: symbiyosys ghdl-formal NOCACHE
+.PHONY: symbiyosys ghdl-formal all NOCACHE
 
 # Support for make environment variable NOCACHE
 ifeq (NOCACHE,$(lastword $(MAKECMDGOALS)))
