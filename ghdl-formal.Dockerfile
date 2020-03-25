@@ -3,18 +3,15 @@
 FROM symbiyosys as symbiyosys-ghdl
 
 ARG LLVM_VER="7"
-ARG GNAT_VER="8"
+#ARG GNAT_VER="8"
 
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     gnat \
-    zlib1g-dev \
     llvm-dev && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
-    rm -rf /var/lib/apt/lists/*
-
-# Build GHDL
-RUN cd /root && \
+    rm -rf /var/lib/apt/lists/* && \
+    cd /root && \
     mkdir ghdl && \
     cd ghdl && \
     curl https://codeload.github.com/ghdl/ghdl/tar.gz/master | tar xzf - --strip-components=1 && \
@@ -51,7 +48,7 @@ RUN apt-get update -qq && \
     gcc \
     make \
     python3 && \
-    apt-get autoclean && apt-get clean && apt-get -y autoremove && \
+    apt-get upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
