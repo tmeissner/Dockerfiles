@@ -45,6 +45,8 @@ RUN apt-get update -qq && \
     libgnat-8 \
     libllvm7 \
     gcc \
+    libc6-dev \
+    zlib1g-dev \
     make \
     python3 && \
     apt-get upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
