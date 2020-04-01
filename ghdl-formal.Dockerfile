@@ -25,9 +25,9 @@ FROM symbiyosys-ghdl AS symbiyosys-ghdlsynth
 
 # Build ghdlsynth-beta
 RUN cd /root && \
-    mkdir ghdlsynth-beta && \
-    cd ghdlsynth-beta && \
-    curl https://codeload.github.com/tgingold/ghdlsynth-beta/tar.gz/master | tar xzf - --strip-components=1 && \
+    mkdir ghdl-yosys-plugin && \
+    cd ghdl-yosys-plugin && \
+    curl https://codeload.github.com/ghdl/ghdl-yosys-plugin/tar.gz/master | tar xzf - --strip-components=1 && \
     make GHDL=/opt/ghdl/bin/ghdl YOSYS_CONFIG=/opt/yosys/bin/yosys-config && \
     make install GHDL=/opt/ghdl/bin/ghdl YOSYS_CONFIG=/opt/yosys/bin/yosys-config
 
