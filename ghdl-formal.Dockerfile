@@ -49,7 +49,7 @@ RUN apt-get update -qq && \
     zlib1g-dev \
     make \
     python3 && \
-    apt-get upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
+    apt-get -y upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
