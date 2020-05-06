@@ -23,4 +23,3 @@ all: symbiyosys ghdl-formal
 .SECONDEXPANSION:
 symbiyosys ghdl-formal: $$@.Dockerfile
 	docker build ${OPTIONS} -t $@:${TAG} -f $@.Dockerfile .
-	docker build -t $@:latest -f $@.Dockerfile .
