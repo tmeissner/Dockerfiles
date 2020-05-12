@@ -29,7 +29,6 @@ RUN apt-get update -qq && \
     cd /root && \
     git clone https://github.com/YosysHQ/yosys.git yosys && \
     cd yosys && \
-    git clone https://github.com/berkeley-abc/abc.git abc && \
     make -j$(nproc) PREFIX=/opt/yosys && \
     make install PREFIX=/opt/yosys
 
