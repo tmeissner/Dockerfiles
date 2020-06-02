@@ -48,7 +48,8 @@ RUN apt-get update -qq && \
     libc6-dev \
     zlib1g-dev \
     make \
-    python3 && \
+    python3 \
+    libpython2.7 && \
     apt-get -y upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
@@ -57,4 +58,4 @@ RUN apt-get update -qq && \
 COPY --from=symbiyosys-ghdlsynth /opt /opt
 
 # Enhance path variable
-ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/cvc4/bin:/opt/boolector/bin:$PATH"
+ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/cvc4/bin:/opt/boolector/bin:/opt/super_prove/bin:$PATH"

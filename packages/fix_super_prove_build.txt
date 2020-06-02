@@ -1,0 +1,25 @@
+diff -r bde167bca3cd Bip/Main_bip.cc
+--- a/Bip/Main_bip.cc	Thu Sep 14 01:44:08 2017 -0700
++++ b/Bip/Main_bip.cc	Thu Aug 08 15:02:00 2019 +0200
+@@ -508,8 +508,8 @@
+ void writeCex(Out& out, NetlistRef N, const Cex& cex, uint orig_num_pis)
+ {
+     Vec<Pair<int,GLit> > ffs, pis;
+-    For_Gatetype(N, gate_Flop, w) ffs.push(tuple(attr_Flop(w).number, w));
+-    For_Gatetype(N, gate_PI  , w) pis.push(tuple(attr_PI  (w).number, w));
++    For_Gatetype(N, gate_Flop, w) ffs.push(::tuple(attr_Flop(w).number, w));
++    For_Gatetype(N, gate_PI  , w) pis.push(::tuple(attr_PI  (w).number, w));
+     sort(ffs);
+     sort(pis);
+
+diff -r bde167bca3cd MetaSat/MiniSat2/System.cc
+--- a/MetaSat/MiniSat2/System.cc	Thu Sep 14 01:44:08 2017 -0700
++++ b/MetaSat/MiniSat2/System.cc	Thu Aug 08 15:02:00 2019 +0200
+@@ -20,6 +20,7 @@
+
+ #include <signal.h>
+ #include <stdio.h>
++#include <stdlib.h>
+
+ #include "System.hh"
+

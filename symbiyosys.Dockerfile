@@ -37,13 +37,21 @@ RUN apt-get update -qq && \
 
 FROM yosys AS symbiyosys
 
+COPY packages/suprove /root/suprove
+COPY packages/fix_super_prove_build.txt /root/fix_super_prove_build.txt
+
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     autoconf \
     gperf  \
     cmake \
     curl \
-    libgmp-dev && \
+    libgmp-dev \
+    ninja-build \
+    g++ \
+    python-setuptools \
+    python-pip \
+    mercurial && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     cd /root && \
@@ -80,4 +88,18 @@ RUN apt-get update -qq && \
     mkdir /opt/boolector/bin && \
     cp build/bin/boolector /opt/boolector/bin/ && \
     cp build/bin/btor* /opt/boolector/bin/ && \
-    cp deps/btor2tools/bin/btorsim /opt/boolector/bin/
+    cp deps/btor2tools/bin/btorsim /opt/boolector/bin/ && \
+    cd /root && \
+    git clone --recursive https://github.com/sterin/super-prove-build && \
+    cd super-prove-build/abc-zz && \
+    patch -p1 < /root/fix_super_prove_build.txt && \
+    cd .. && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Release -G Ninja .. && \
+    ninja && \
+    ninja package && \
+    tar -C /opt -xzf super_prove*.tar.gz && \
+    mv /root/suprove /opt/super_prove/bin/ && \
+    chmod +x /opt/super_prove/bin/suprove && \
+    rm -rf /root/*
