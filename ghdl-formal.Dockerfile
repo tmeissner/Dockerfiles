@@ -16,7 +16,9 @@ RUN apt-get update -qq && \
     curl https://codeload.github.com/ghdl/ghdl/tar.gz/master | tar xzf - --strip-components=1 && \
     ./configure --enable-synth --prefix=/opt/ghdl --with-llvm-config=llvm-config-$LLVM_VER && \
     make && \
-    make install
+    make install && \
+    mkdir /opt/ghdl/doc && \
+    curl https://ghdl.readthedocs.io/_/downloads/en/latest/pdf/ -o /opt/ghdl/doc/ghdl_manual.pdf
 
 
 ## GHDLSYNTH-BETA ##

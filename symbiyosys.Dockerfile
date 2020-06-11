@@ -22,6 +22,7 @@ RUN apt-get update -qq && \
     libboost-python-dev \
     libboost-filesystem-dev \
     clang \
+    curl \
     git && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     update-ca-certificates && \
@@ -30,7 +31,9 @@ RUN apt-get update -qq && \
     git clone https://github.com/YosysHQ/yosys.git yosys && \
     cd yosys && \
     make -j$(nproc) PREFIX=/opt/yosys && \
-    make install PREFIX=/opt/yosys
+    make install PREFIX=/opt/yosys && \
+    mkdir /opt/yosys/doc && \
+    curl http://www.clifford.at/yosys/files/yosys_manual.pdf -o /opt/yosys/doc/yosys_manual.pdf
 
 
 # SymbiYosys, Solvers
@@ -45,7 +48,6 @@ RUN apt-get update -qq && \
     autoconf \
     gperf  \
     cmake \
-    curl \
     libgmp-dev \
     ninja-build \
     g++ \
@@ -58,6 +60,8 @@ RUN apt-get update -qq && \
     git clone https://github.com/YosysHQ/SymbiYosys.git symbiyosys && \
     cd symbiyosys && \
     make install PREFIX=/opt/symbiyosys && \
+    mkdir /opt/symbiyosys/doc && \
+    curl https://symbiyosys.readthedocs.io/_/downloads/en/latest/pdf/ -o /opt/symbiyosys/doc/symbiyosys_manual.pdf && \
     cd .. && \
     git clone https://github.com/Z3Prover/z3.git z3 && \
     cd z3 && \
