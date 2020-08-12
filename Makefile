@@ -34,7 +34,8 @@ ghdl-formal_${TAG}.tar.gz:
 	docker run --rm -dit --name=ghdl-dummy ghdl-formal:${TAG} > /dev/null
 	docker cp ghdl-dummy:/opt/. artefacts
 	docker rm -f ghdl-dummy > /dev/null
-	tar -C artefacts -czf ghdl-formal_${TAG}.tar.gz .
+	tar -C artefacts -czf $@ .
+	shasum --algorithm 256 --UNIVERSAL $@ > $@.sha256
 
 
 clean:
