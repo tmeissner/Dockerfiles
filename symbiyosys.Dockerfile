@@ -53,6 +53,7 @@ RUN apt-get update -qq && \
     g++ \
     python-setuptools \
     python-pip \
+    python-wheel \
     mercurial && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* && \

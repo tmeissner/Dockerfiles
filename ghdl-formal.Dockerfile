@@ -51,6 +51,7 @@ RUN apt-get update -qq && \
     zlib1g-dev \
     make \
     python3 \
+    libssl-dev \
     libpython2.7 && \
     apt-get -y upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     update-ca-certificates && \
