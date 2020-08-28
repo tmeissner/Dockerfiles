@@ -40,4 +40,4 @@ ghdl-formal_${TAG}.tar.gz:
 
 clean:
 	rm -rf artefacts
-	rm -f ghdl-formal_*.tar.gz
+	rm -f ghdl-formal_*.tar.*
