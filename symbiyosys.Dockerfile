@@ -41,7 +41,6 @@ RUN apt-get update -qq && \
 FROM yosys AS symbiyosys
 
 COPY packages/suprove /root/suprove
-COPY packages/fix_super_prove_build.txt /root/fix_super_prove_build.txt
 
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -96,9 +95,7 @@ RUN apt-get update -qq && \
     cp deps/btor2tools/bin/btorsim /opt/boolector/bin/ && \
     cd /root && \
     git clone --recursive https://github.com/sterin/super-prove-build && \
-    cd super-prove-build/abc-zz && \
-    patch -p1 < /root/fix_super_prove_build.txt && \
-    cd .. && \
+    cd super-prove-build && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release -G Ninja .. && \
