@@ -24,6 +24,8 @@ Based on *symbiyosys.Dockerfile*
 * GHDL
 * ghdl-yosys-plugin
 
+**A similar image is the [`hdlc/formal`](https://hub.docker.com/r/hdlc/formal/tags) docker image and its variants provided by the [hdl containers project](https://hdl.github.io/containers/). I recommend it because it is provided through docker hub. No need to build images by yourself.**
+
 ## Further Ressources
 
 * [Yosys](https://github.com/YosysHQ/yosys)
