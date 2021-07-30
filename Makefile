@@ -1,4 +1,4 @@
-.PHONY: symbiyosys ghdl-formal all NOCACHE clean copy
+.PHONY: symbiyosys ghdl-formal riscv-gcc all NOCACHE clean copy
 
 # Support for make environment variable NOCACHE
 ifeq (NOCACHE,$(lastword $(MAKECMDGOALS)))
@@ -19,25 +19,27 @@ else
 endif
 
 
-all: symbiyosys ghdl-formal
+all: symbiyosys ghdl-formal riscv-gcc
 
-copy: ghdl-formal_${TAG}.tar.gz
+copy: copy-ghdl copy-riscv
+copy-ghdl: ghdl-formal_${TAG}.tar.gz
+copy-riscv: riscv-gcc_${TAG}.tar.gz
 
 
 .SECONDEXPANSION:
-symbiyosys ghdl-formal: $$@.Dockerfile
+symbiyosys ghdl-formal riscv-gcc: $$@.Dockerfile
 	docker build ${OPTIONS} -t $@:${TAG} -f $@.Dockerfile .
 
 
-ghdl-formal_${TAG}.tar.gz:
+%_${TAG}.tar.gz:
 	mkdir -p artefacts
-	docker run --rm -dit --name=ghdl-dummy ghdl-formal:${TAG} > /dev/null
-	docker cp ghdl-dummy:/opt/. artefacts
-	docker rm -f ghdl-dummy > /dev/null
+	docker run --rm -dit --name=$*-dummy $*:${TAG} > /dev/null
+	docker cp $*-dummy:/opt/. artefacts
+	docker rm -f $*-dummy > /dev/null
 	tar -C artefacts -czf $@ .
 	shasum --algorithm 256 --UNIVERSAL $@ > $@.sha256
 
 
 clean:
 	rm -rf artefacts
-	rm -f ghdl-formal_*.tar.*
+	rm -f *.tar.*
