@@ -26,6 +26,17 @@ Based on *symbiyosys.Dockerfile*
 
 **A similar image is the [`hdlc/formal`](https://hub.docker.com/r/hdlc/formal/tags) docker image and its variants provided by the [hdl containers project](https://hdl.github.io/containers/). I recommend it because it is provided through docker hub. No need to build images by yourself.**
 
+## riscv-gcc.Dockerfile
+
+Risc-V toolchain to develop programs for [NEORV32](https://github.com/stnolting/neorv32) CPU. Built for instruction set `rv32i` and ABI `ilp32`.
+
+**Included tools:**
+
+* gcc
+* gdb
+* ...
+
+
 ## Further Ressources
 
 * [Yosys](https://github.com/YosysHQ/yosys)
@@ -37,3 +48,4 @@ Based on *symbiyosys.Dockerfile*
 * [CVC4](https://github.com/CVC4/CVC4)
 * [Boolector](https://github.com/Boolector/boolector)
 * [Super Prove](https://github.com/berkeley-abc/super_prove)
+* [RISC-V Toolchain](https://github.com/riscv/riscv-gcc)
