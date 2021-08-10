@@ -33,7 +33,7 @@ RUN apt-get update -qq && \
     make -j$(nproc) PREFIX=/opt/yosys && \
     make install PREFIX=/opt/yosys && \
     mkdir /opt/yosys/doc && \
-    curl http://www.clifford.at/yosys/files/yosys_manual.pdf -o /opt/yosys/doc/yosys_manual.pdf
+    curl https://github.com/YosysHQ/yosys-manual-build/releases/download/manual/manual.pdf -o /opt/yosys/doc/yosys_manual.pdf
 
 
 # SymbiYosys, Solvers
