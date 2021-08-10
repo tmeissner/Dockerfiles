@@ -32,8 +32,7 @@ RUN apt-get update -qq && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/* && \
     cd /root && \
-    git clone https://github.com/riscv/riscv-gnu-toolchain &&\
-    de riscv-gnu-toolchain && \
+    git clone https://github.com/riscv/riscv-gnu-toolchain && \
+    cd riscv-gnu-toolchain && \
     ./configure --prefix=/opt/riscv-gcc --with-arch=rv32i --with-abi=ilp32 && \
-    make && \
-    make clean
+    make
