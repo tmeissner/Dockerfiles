@@ -12,6 +12,7 @@ A collection of Dockerfiles for easy use of various free & open-source tools. Ha
 * Yices2
 * CVC4
 * Boolector
+* Bitwuzla
 * Super Prove
 
 ## ghdl-formal.Dockerfile
@@ -44,8 +45,9 @@ Risc-V toolchain to develop programs for [NEORV32](https://github.com/stnolting/
 * [GHDL](https://github.com/ghdl/ghdl)
 * [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
 * [Z3](https://github.com/Z3Prover/z3)
-* [Yices 2](https://github.com/SRI-CSL/yices2)
-* [CVC4](https://github.com/CVC4/CVC4)
-* [Boolector](https://github.com/Boolector/boolector)
+* [Yices 2](https://yices.csl.sri.com/)
+* [CVC4](https://cvc4.github.io/)
+* [Boolector](https://boolector.github.io/)
+* [Bitwuzla](https://bitwuzla.github.io/)
 * [Super Prove](https://github.com/berkeley-abc/super_prove)
 * [RISC-V Toolchain](https://github.com/riscv/riscv-gcc)
