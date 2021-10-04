@@ -61,4 +61,4 @@ RUN apt-get update -qq && \
 COPY --from=symbiyosys-ghdlsynth /opt /opt
 
 # Enhance path variable
-ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/cvc4/bin:/opt/boolector/bin:/opt/super_prove/bin:$PATH"
+ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/cvc4/bin:/opt/boolector/bin:/opt/bitwuzla/bin:/opt/super_prove/bin:$PATH"
