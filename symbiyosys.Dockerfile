@@ -94,6 +94,16 @@ RUN apt-get update -qq && \
     cp build/bin/btor* /opt/boolector/bin/ && \
     cp deps/btor2tools/bin/btorsim /opt/boolector/bin/ && \
     cd /root && \
+    git clone https://github.com/bitwuzla/bitwuzla && \
+    cd bitwuzla && \
+    ./contrib/setup-btor2tools.sh && \
+    ./contrib/setup-lingeling.sh && \
+    ./contrib/setup-symfpu.sh && \
+    ./configure.sh && \
+    make -C build -j$(nproc) PREFIX=/opt/bitwuzla && \
+    mkdir -p /opt/bitwuzla/bin && \
+    cp build/bin/bitwuzla /opt/bitwuzla/bin/ && \
+    cd /root && \
     git clone --recursive https://github.com/sterin/super-prove-build && \
     cd super-prove-build && \
     mkdir build && \
