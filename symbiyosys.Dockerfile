@@ -1,4 +1,4 @@
-FROM debian:buster-slim as yosys
+FROM debian:bullseye-slim as yosys
 
 ## YOSYS ##
 
@@ -17,7 +17,6 @@ RUN apt-get update -qq && \
     graphviz \
     xdot \
     pkg-config \
-    python3 \
     libboost-system-dev \
     libboost-python-dev \
     libboost-filesystem-dev \
@@ -51,8 +50,9 @@ RUN apt-get update -qq && \
     ninja-build \
     g++ \
     python-setuptools \
-    python-pip \
-    python-wheel \
+    python3-pip \
+    python-wheel-common \
+    python-dev-is-python2 \
     mercurial && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* && \
@@ -65,7 +65,7 @@ RUN apt-get update -qq && \
     cd .. && \
     git clone https://github.com/Z3Prover/z3.git z3 && \
     cd z3 && \
-    python scripts/mk_make.py && \
+    python3 scripts/mk_make.py && \
     cd build && \
     make -j$(nproc) PREFIX=/opt/z3 && \
     make install PREFIX=/opt/z3 && \

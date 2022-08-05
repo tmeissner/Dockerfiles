@@ -2,7 +2,7 @@
 
 FROM symbiyosys as symbiyosys-ghdl
 
-ARG LLVM_VER="7"
+ARG LLVM_VER="11"
 
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -36,16 +36,18 @@ RUN cd /root && \
 
 # GHDL-formal
 
-FROM debian:buster-slim AS ghdl-formal
+FROM debian:bullseye-slim AS ghdl-formal
+
+ARG LLVM_VER="11"
 
 # Get runtime dependencies
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     ca-certificates \
-    libreadline7 \
+    libreadline8 \
     libtcl8.6 \
-    libgnat-8 \
-    libllvm7 \
+    libgnat-10 \
+    libllvm$LLVM_VER \
     gcc \
     libc6-dev \
     zlib1g-dev \
