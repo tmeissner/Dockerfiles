@@ -41,6 +41,7 @@ RUN apt-get update -qq && \
 FROM yosys AS symbiyosys
 
 COPY packages/suprove /root/suprove
+COPY packages/avy.patch /root/avy.patch
 
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -53,6 +54,7 @@ RUN apt-get update -qq && \
     python-setuptools \
     python-pip \
     python-wheel \
+    libboost-program-options-dev \
     mercurial && \
     apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* && \
@@ -113,5 +115,16 @@ RUN apt-get update -qq && \
     ninja package && \
     tar -C /opt -xzf super_prove*.tar.gz && \
     mv /root/suprove /opt/super_prove/bin/ && \
-    chmod +x /opt/super_prove/bin/suprove && \
+    chmod +x /opt/super_prove/bin/suprove
+
+RUN cd /root && \
+    git clone https://bitbucket.org/arieg/extavy.git && \
+    cd extavy && \
+    git checkout new_quip && \
+    git submodule update --init && \
+    mkdir build; cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Debug .. && \
+    make -j$(nproc) && \
+    mkdir -p /opt/avy/bin && \
+    cp -r avy/src/av* /opt/avy/bin/ && \
     rm -rf /root/*

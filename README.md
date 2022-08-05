@@ -14,6 +14,7 @@ A collection of Dockerfiles for easy use of various free & open-source tools. Ha
 * Boolector
 * Bitwuzla
 * Super Prove
+* Avy
 
 ## ghdl-formal.Dockerfile
 
@@ -47,6 +48,7 @@ Risc-V toolchain to develop programs for [NEORV32](https://github.com/stnolting/
 * [Z3](https://github.com/Z3Prover/z3)
 * [Yices 2](https://yices.csl.sri.com/)
 * [CVC4](https://cvc4.github.io/)
+* [Avy](https://bitbucket.org/arieg/extavy)
 * [Boolector](https://boolector.github.io/)
 * [Bitwuzla](https://bitwuzla.github.io/)
 * [Super Prove](https://github.com/berkeley-abc/super_prove)

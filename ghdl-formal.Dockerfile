@@ -52,6 +52,8 @@ RUN apt-get update -qq && \
     make \
     python3 \
     libssl-dev \
+    libboost-program-options1.67.0 \
+    strace \
     libpython2.7 && \
     apt-get -y upgrade && apt-get autoclean && apt-get clean && apt-get -y autoremove && \
     update-ca-certificates && \
@@ -61,4 +63,4 @@ RUN apt-get update -qq && \
 COPY --from=symbiyosys-ghdlsynth /opt /opt
 
 # Enhance path variable
-ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/cvc4/bin:/opt/boolector/bin:/opt/bitwuzla/bin:/opt/super_prove/bin:$PATH"
+ENV PATH "/opt/ghdl/bin:/opt/symbiyosys/bin:/opt/yosys/bin:/opt/z3/bin:/opt/yices2/bin:/opt/avy/bin:/opt/cvc4/bin:/opt/boolector/bin:/opt/bitwuzla/bin:/opt/super_prove/bin:$PATH"
