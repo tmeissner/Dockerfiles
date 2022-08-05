@@ -1,0 +1,36 @@
+diff --git a/src/ItpGlucose.h b/src/ItpGlucose.h
+index 657253d..66a0cd4 100644
+--- a/src/ItpGlucose.h
++++ b/src/ItpGlucose.h
+@@ -126,7 +126,7 @@ namespace avy
+     ::Glucose::Solver* get () { return m_pSat; }
+     
+     /// true if the context is decided 
+-    bool isSolved () { return m_Trivial || m_State || !m_State; }
++    bool isSolved () { return bool{m_Trivial || m_State || !m_State}; }
+ 
+     int core (int **out)
+     {
+@@ -182,7 +182,8 @@ namespace avy
+     bool getVarVal(int v)
+     {
+         ::Glucose::Var x = v;
+-        return tobool (m_pSat->modelValue(x));
++        boost::logic::tribool y = tobool (m_pSat->modelValue(x));
++        return bool{y};
+     }
+   };
+   
+diff --git a/src/ItpMinisat.h b/src/ItpMinisat.h
+index d145d7c..7514f31 100644
+--- a/src/ItpMinisat.h
++++ b/src/ItpMinisat.h
+@@ -124,7 +124,7 @@ namespace avy
+     ::Minisat::Solver* get () { return m_pSat.get (); }
+     
+     /// true if the context is decided 
+-    bool isSolved () { return m_Trivial || m_State || !m_State; }
++    bool isSolved () { return bool{m_Trivial || m_State || !m_State}; }
+ 
+     int core (int **out)
+     {
