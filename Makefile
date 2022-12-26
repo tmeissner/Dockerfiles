@@ -1,4 +1,4 @@
-.PHONY: symbiyosys ghdl-formal riscv-gcc all NOCACHE clean copy
+.PHONY: symbiyosys ghdl-formal riscv-gcc gatemate all NOCACHE clean copy
 
 # Support for make environment variable NOCACHE
 ifeq (NOCACHE,$(lastword $(MAKECMDGOALS)))
@@ -19,15 +19,20 @@ else
 endif
 
 
-all: symbiyosys ghdl-formal riscv-gcc
+all: symbiyosys ghdl-formal riscv-gcc gatemate
 
 copy: copy-ghdl copy-riscv
 copy-ghdl: ghdl-formal_${TAG}.tar.gz
 copy-riscv: riscv-gcc_${TAG}.tar.gz
 
 
+packages/gatemate-toolchain.tar.gz:
+	curl https://colognechip.com/downloads/cc-toolchain-linux.tar.gz --output $@
+
+gatemate: packages/gatemate-toolchain.tar.gz
+
 .SECONDEXPANSION:
-symbiyosys ghdl-formal riscv-gcc: $$@.Dockerfile
+symbiyosys ghdl-formal riscv-gcc gatemate: $$@.Dockerfile
 	docker build ${OPTIONS} -t $@:${TAG} -f $@.Dockerfile .
 
 
@@ -43,3 +48,4 @@ symbiyosys ghdl-formal riscv-gcc: $$@.Dockerfile
 clean:
 	rm -rf artefacts
 	rm -f *.tar.*
+	rm -f packages/gatemate-toolchain.tar.gz
